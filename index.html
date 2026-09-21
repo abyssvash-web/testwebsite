@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AEGIS — A New Adventure Is About To Begin</title>
+  <meta name="description" content="AEGIS — A new MMORPG adventure is about to begin. Pre-register now and join the official Discord community.">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background: #020707;
+      color: #eee8d8;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+      background:
+        radial-gradient(circle at center, transparent 35%, rgba(0,0,0,.42) 100%);
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        linear-gradient(rgba(0,8,9,.12), rgba(0,5,6,.42)),
+        url("dragon-bg.png") center center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,.62) 0%, transparent 22%, transparent 72%, #020707 100%),
+        linear-gradient(to right, rgba(0,0,0,.25), transparent 35%, transparent 65%, rgba(0,0,0,.2));
+      pointer-events: none;
+    }
+
+    nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 76px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: linear-gradient(rgba(0,0,0,.8), transparent);
+      border-bottom: 1px solid rgba(54,235,214,.2);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #e8dcc1;
+      font-size: 24px;
+      letter-spacing: 3px;
+      text-decoration: none;
+      text-shadow: 0 0 12px rgba(0,255,220,.25);
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 7px rgba(0,255,220,.35));
+    }
+
+    .links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .links a {
+      color: #eee8d8;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 1.5px;
+      transition: .25s;
+    }
+
+    .links a:hover { color: #39f4df; }
+
+    .nav-btn {
+      border: 1px solid rgba(47,239,216,.65);
+      padding: 9px 16px;
+      border-radius: 22px;
+      color: #49f5e2 !important;
+      box-shadow: 0 0 15px rgba(0,255,220,.08);
+      font-size: 12px !important;
+    }
+
+    .disabled-link {
+      opacity: 0.6;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 5;
+      text-align: center;
+      width: min(900px, 92%);
+      padding-top: 50px;
+    }
+
+    .hero-logo {
+      width: min(330px, 65vw);
+      max-height: 330px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 20px rgba(0,0,0,.75)) drop-shadow(0 0 16px rgba(0,255,220,.18));
+      margin-bottom: 12px;
+    }
+
+    .eyebrow {
+      color: #f1d8aa;
+      font-size: clamp(20px, 2.1vw, 30px);
+      letter-spacing: 8px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 8px #000;
+      margin-top: 5px;
+    }
+
+    .sub {
+      margin-top: 14px;
+      color: #eee;
+      letter-spacing: 6px;
+      font-size: 13px;
+      text-shadow: 0 2px 8px #000;
+    }
+
+    .coming {
+      margin: 24px auto 0;
+      width: min(570px, 90%);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: #e7d8bb;
+      letter-spacing: 3px;
+      font-size: 15px;
+    }
+
+    .coming::before,
+    .coming::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(to right, transparent, rgba(232,207,162,.8));
+    }
+
+    .coming::after {
+      background: linear-gradient(to left, transparent, rgba(232,207,162,.8));
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 200px;
+      padding: 14px 24px;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: .25s;
+    }
+
+    .btn-primary {
+      color: #eafffb;
+      border: 1px solid #35ead5;
+      background: linear-gradient(180deg, rgba(0,111,103,.65), rgba(0,35,37,.88));
+      box-shadow: inset 0 0 20px rgba(0,255,220,.12), 0 0 18px rgba(0,255,220,.18);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: inset 0 0 25px rgba(0,255,220,.2), 0 0 28px rgba(0,255,220,.32);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      color: #52f4e2;
+      border: 1px solid rgba(55,230,211,.75);
+      background: rgba(0,15,17,.55);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0,85,80,.45);
+    }
+
+    .btn-disabled {
+      color: #8a9c99;
+      border: 1px solid rgba(138, 156, 153, 0.4);
+      background: rgba(15, 25, 26, 0.6);
+      cursor: not-allowed;
+    }
+
+    section {
+      position: relative;
+      z-index: 3;
+      background: rgba(2,10,11,.97);
+    }
+
+    .section {
+      padding: 90px 6%;
+      text-align: center;
+    }
+
+    .section-title {
+      color: #e9d6ae;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .section-sub {
+      color: #8ca09d;
+      letter-spacing: 2px;
+      margin-bottom: 45px;
+    }
+
+    .features {
+      max-width: 1150px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      min-height: 190px;
+      padding: 30px 22px;
+      border: 1px solid rgba(46,216,198,.18);
+      background: linear-gradient(145deg, rgba(7,30,31,.9), rgba(1,11,12,.9));
+      box-shadow: inset 0 0 30px rgba(0,255,220,.025);
+    }
+
+    .feature-icon {
+      font-size: 34px;
+      margin-bottom: 14px;
+    }
+
+    .feature h3 {
+      color: #ead8b5;
+      font-size: 17px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .feature p {
+      color: #8fa3a0;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .register-section {
+      padding: 100px 20px;
+      min-height: 650px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:
+        linear-gradient(rgba(0,10,11,.9), rgba(0,7,8,.97)),
+        url("dragon-bg.png") center / cover;
+    }
+
+    .register-card {
+      width: min(600px, 100%);
+      padding: 45px;
+      text-align: center;
+      border: 1px solid rgba(52,235,214,.35);
+      background: rgba(1,13,15,.9);
+      box-shadow: 0 0 45px rgba(0,255,220,.08);
+    }
+
+    .register-card h2 {
+      color: #e9d6ae;
+      letter-spacing: 5px;
+      margin-bottom: 10px;
+    }
+
+    .register-card p {
+      color: #8fa3a0;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .field {
+      text-align: left;
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+      color: #d9c9aa;
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 15px 16px;
+      color: #fff;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(53,220,204,.3);
+      outline: none;
+      font-size: 15px;
+      transition: border-color 0.25s;
+    }
+
+    .field input:focus {
+      border-color: #39e9d4;
+      box-shadow: 0 0 12px rgba(0,255,220,.12);
+    }
+
+    .register-card .btn {
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    #status {
+      min-height: 24px;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 0.8s ease-in-out infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    footer {
+      padding: 30px 6%;
+      background: #010506;
+      border-top: 1px solid rgba(53,220,204,.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #71817f;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      color: #54eede;
+      text-decoration: none;
+      transition: opacity 0.25s;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 900px) {
+      .links a:not(.nav-btn) { display: none; }
+      .features { grid-template-columns: 1fr; max-width: 550px; }
+      .eyebrow { letter-spacing: 4px; }
+      .sub { letter-spacing: 3px; }
+    }
+
+    @media (max-width: 600px) {
+      nav { height: 64px; padding: 0 18px; }
+      .brand { font-size: 19px; }
+      .brand img { width: 38px; height: 38px; }
+      .links { gap: 8px; }
+      .nav-btn { padding: 7px 10px; font-size: 10px !important; }
+      .hero-content { padding-top: 20px; }
+      .hero-logo { width: 260px; }
+      .eyebrow { font-size: 17px; }
+      .sub { font-size: 10px; letter-spacing: 2px; }
+      .actions { gap: 10px; flex-direction: column; }
+      .btn { width: 100%; min-width: 0; }
+      .register-card { padding: 30px 20px; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="hero" id="home">
+    <nav>
+      <a class="brand" href="#home">
+        <img src="aegis-logo.png" alt="AEGIS Logo">
+        <span>AEGIS</span>
+      </a>
+
+      <div class="links">
+        <a href="#home">HOME</a>
+        <a href="#features">FEATURES</a>
+        <a href="#register">PRE-REGISTER</a>
+        <a class="disabled-link" href="#" style="color: #71817f;">DOWNLOAD (SOON)</a>
+        <a class="nav-btn" href="https://facebook.com/Official.Aegis" target="_blank">FACEBOOK</a>
+        <a class="nav-btn" href="https://discord.gg/official-aegis" target="_blank">DISCORD</a>
+      </div>
+    </nav>
+
+    <div class="hero-content">
+      <img class="hero-logo" src="aegis-logo.png" alt="AEGIS">
+
+      <div class="eyebrow">A NEW ADVENTURE IS ABOUT TO BEGIN</div>
+      <div class="sub">MMORPG &nbsp;•&nbsp; EPIC BATTLES &nbsp;•&nbsp; ENDLESS ADVENTURES</div>
+
+      <div class="coming">COMING SOON</div>
+
+      <div class="actions">
+        <a href="#register" class="btn btn-primary">PRE-REGISTER →</a>
+        <a href="#" class="btn btn-disabled" onclick="event.preventDefault();">⬇ &nbsp; DOWNLOAD (SOON)</a>
+        <a href="https://facebook.com/Official.Aegis" target="_blank" class="btn btn-secondary">👍 &nbsp; FACEBOOK PAGE</a>
+        <a href="https://discord.gg/official-aegis" target="_blank" class="btn btn-secondary">◉ &nbsp; JOIN DISCORD</a>
+      </div>
+    </div>
+  </header>
+
+  <section id="features" class="section">
+    <h2 class="section-title">FEATURES</h2>
+    <p class="section-sub">DISCOVER WHAT AWAITS WITHIN THE WORLD OF AEGIS.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">⚔️</div>
+        <h3>EPIC COMBAT</h3>
+        <p>Challenge powerful enemies and prove your strength on the battlefield.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🐉</div>
+        <h3>MYTHICAL WORLD</h3>
+        <p>Explore a mysterious world filled with ancient powers and legendary creatures.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">👑</div>
+        <h3>RISE TO GLORY</h3>
+        <p>Build your character, join your allies, and rise above your rivals.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <h3>GUILD WAR</h3>
+        <p>Fight alongside your guild and compete for supremacy.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💎</div>
+        <h3>LEGENDARY BOSSES</h3>
+        <p>Face powerful bosses and claim valuable rewards.</p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">✦</div>
+        <h3>EVENTS & REWARDS</h3>
+        <p>Participate in special events and earn exclusive rewards.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="register" class="register-section">
+    <div class="register-card">
+      <h2>PRE-REGISTER</h2>
+      <p>Enter your details below to reserve your place in the world of AEGIS.</p>
+
+      <form id="registerForm">
+        <div class="field">
+          <label for="discord">DISCORD NAME</label>
+          <input
+            type="text"
+            id="discord"
+            name="discord"
+            placeholder="e.g. YourName"
+            required
+            maxlength="100"
+          >
+        </div>
+
+        <div class="field">
+          <label for="email">EMAIL ADDRESS</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+            maxlength="150"
+          >
+        </div>
+
+        <div class="field">
+          <label for="referral">REFERRAL (OPTIONAL)</label>
+          <input
+            type="text"
+            id="referral"
+            name="referral"
+            placeholder="ENTER 6 DIGIT CODE"
+            maxlength="6"
+          >
+        </div>
+
+        <div class="field">
+          <label for="createReferral">CREATE REFERRAL (OPTIONAL)</label>
+          <input
+            type="text"
+            id="createReferral"
+            name="createReferral"
+            placeholder="CREATE 6 DIGIT CODE"
+            maxlength="6"
+            pattern="\d{6}"
+            inputmode="numeric"
+          >
+        </div>
+
+        <button class="btn btn-primary" type="submit" id="submitBtn">
+          SUBMIT REGISTRATION
+        </button>
+
+        <div id="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 AEGIS. All Rights Reserved.</div>
+    <div>www.official-aegis.com</div>
+    <div class="footer-links">
+      <a href="https://facebook.com/Official.Aegis" target="_blank">FACEBOOK</a>
+      <a href="https://discord.gg/official-aegis" target="_blank">DISCORD</a>
+    </div>
+  </footer>
+
+  <script>
+    const GOOGLE_SCRIPT_URL =
+      "https://script.google.com/macros/s/AKfycbxEQpjrIjy65Sjne1Bf858OQoxPZe7tD08PclQqTJlMOJL2dfch0c5oQqg7zr1g4TkCMA/exec";
+
+    const DISCORD_URL = "https://discord.gg/official-aegis";
+
+    const form = document.getElementById("registerForm");
+    const status = document.getElementById("status");
+    const submitBtn = document.getElementById("submitBtn");
+    const emailInput = document.getElementById("email");
+    const createReferralInput = document.getElementById("createReferral");
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const discord = document.getElementById("discord").value.trim();
+      const email = emailInput.value.trim();
+      const referral = document.getElementById("referral").value.trim();
+      const createReferral = createReferralInput.value.trim();
+
+      // Reset border styles
+      emailInput.style.borderColor = "rgba(53,220,204,.3)";
+      createReferralInput.style.borderColor = "rgba(53,220,204,.3)";
+      status.textContent = "";
+
+      if (!discord || !email) {
+        status.textContent = "Please complete all required fields.";
+        status.style.color = "#ff8b8b";
+        return;
+      }
+
+      // 6-digit verification check
+      if (createReferral !== "" && !/^\d{6}$/.test(createReferral)) {
+        status.textContent = "Referral code must be exactly 6 digits.";
+        status.style.color = "#ff8b8b";
+        createReferralInput.style.borderColor = "#ff4d4d";
+        createReferralInput.focus();
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span class="spinner"></span> SUBMITTING...`;
+      status.textContent = "Processing registration...";
+      status.style.color = "#eee8d8";
+
+      const callbackName = "handleResponse_" + Math.round(100000 * Math.random());
+
+      window[callbackName] = function (result) {
+        delete window[callbackName];
+        if (script && script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+
+        if (result.status === "EMAIL_EXISTS") {
+          status.textContent = "Email address is already registered!";
+          status.style.color = "#ff8b8b";
+          emailInput.style.borderColor = "#ff4d4d";
+          emailInput.focus();
+
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "SUBMIT REGISTRATION";
+        } else if (result.status === "EXISTS") {
+          status.textContent = "Referral code already exists! Please choose another.";
+          status.style.color = "#ff8b8b";
+          createReferralInput.style.borderColor = "#ff4d4d";
+          createReferralInput.focus();
+
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "SUBMIT REGISTRATION";
+        } else if (result.status === "SUCCESS") {
+          submitBtn.innerHTML = `<span class="spinner"></span> SUCCESS! REDIRECTING...`;
+          status.textContent = "Registration Successful! Redirecting to Discord in 2 seconds...";
+          status.style.color = "#4ff5df";
+
+          setTimeout(() => {
+            window.location.href = DISCORD_URL;
+          }, 2000);
+        } else {
+          status.textContent = "Something went wrong. Please try again.";
+          status.style.color = "#ff8b8b";
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = "SUBMIT REGISTRATION";
+        }
+      };
+
+      const params = new URLSearchParams({
+        callback: callbackName,
+        discord: discord,
+        email: email,
+        referral: referral,
+        createReferral: createReferral
+      });
+
+      const script = document.createElement("script");
+      script.src = `${GOOGLE_SCRIPT_URL}?${params.toString()}`;
+      script.onerror = function () {
+        delete window[callbackName];
+        status.textContent = "Something went wrong. Please try again.";
+        status.style.color = "#ff8b8b";
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "SUBMIT REGISTRATION";
+      };
+
+      document.body.appendChild(script);
+    });
+  </script>
+
+</body>
+</html>
